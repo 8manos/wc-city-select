@@ -21,11 +21,7 @@ jQuery( function($) {
 
   $( 'body' ).on( 'change', 'select.state_select, #calc_shipping_state', function() {
 
-    if ( $( this ).attr('id') == 'calc_shipping_state' ) {
-      var $container = $( this ).closest( 'form' );
-    } else {
-      var $container = $( this ).closest( 'div' );
-    }
+    var $container = $( this ).closest( 'div' );
 
     var country = $container.find( '#billing_country, #shipping_country, #calc_shipping_country' ).val();
     var state = $( this ).val();

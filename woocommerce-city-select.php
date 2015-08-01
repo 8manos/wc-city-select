@@ -149,7 +149,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 
 		public function load_scripts() {
-			if ( is_cart() || is_checkout() ) {
+			if ( is_cart() || is_checkout() || is_wc_endpoint_url( 'edit-address' ) ) {
 
 				$city_select_path = $this->get_plugin_url() . 'assets/js/city-select.js';
 				wp_enqueue_script( 'wc-city-select', $city_select_path, array( 'jquery', 'woocommerce' ), self::VERSION, true );

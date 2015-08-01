@@ -1122,7 +1122,7 @@ $cities['CO'] = array(
 		'Buga',
 		'Bugalagrande',
 		'Caicedonia',
-		'Calí',
+		'Cali',
 		'Calima (Darién)',
 		'Candelaria',
 		'Cartago',
