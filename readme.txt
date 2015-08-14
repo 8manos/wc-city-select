@@ -2,9 +2,9 @@
 Contributors: mantish
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
-Tested up to: 4.2.3
+Tested up to: 4.3
 WC requires at least: 2.2
-WC tested up to: 2.3.13
+WC tested up to: 2.4.3
 
 Show a dropdown select as the cities input.
 
