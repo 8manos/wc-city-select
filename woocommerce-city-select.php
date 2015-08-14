@@ -115,6 +115,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$country_key = $key == 'billing_city' ? 'billing_country' : 'shipping_country';
 			$current_cc  = WC()->checkout->get_value( $country_key );
 
+			$state_key = $key == 'billing_city' ? 'billing_state' : 'shipping_state';
+			$current_sc  = WC()->checkout->get_value( $state_key );
+
 			// Get country cities
 			$cities = $this->get_cities( $current_cc );
 
@@ -123,11 +126,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="city_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) .'" ' . implode( ' ', $custom_attributes ) . ' placeholder="' . esc_attr( $args['placeholder'] ) . '">
 					<option value="">'. __( 'Select an option&hellip;', 'woocommerce' ) .'</option>';
 
-				// Temporary, all cities, no js
-				$merged_cities = array_reduce( $cities, 'array_merge', array() );
-				sort( $merged_cities ) ;
+				if ( $current_sc ) {
+					$dropdown_cities = $cities[ $current_sc ];
+				} else {
+					$dropdown_cities = array_reduce( $cities, 'array_merge', array() );
+					sort( $dropdown_cities ) ;
+				}
 
-				foreach ( $merged_cities as $city_name ) {
+				foreach ( $dropdown_cities as $city_name ) {
 					$field .= '<option value="' . esc_attr( $city_name ) . '" '.selected( $value, $city_name, false ) . '>' . $city_name .'</option>';
 				}
 
