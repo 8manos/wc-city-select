@@ -1,10 +1,12 @@
 <?php
 /**
- * Plugin Name: WooCommerce City Select
- * Description: Show a dropdown select as the cities input.
+ * Plugin Name: WC City Select
+ * Description: City Select for WooCommerce. Show a dropdown select as the cities input.
  * Version:     1.0
  * Author:      8manos
  * Author URI:  http://8manos.com
+ * License:     GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
