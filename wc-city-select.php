@@ -3,7 +3,7 @@
  * Plugin Name: WC City Select
  * Plugin URI:  https://wordpress.org/plugins/wc-city-select/
  * Description: City Select for WooCommerce. Show a dropdown select as the cities input.
- * Version:     1.0
+ * Version:     1.0.1
  * Author:      8manos
  * Author URI:  http://8manos.com
  * License:     GPLv2 or later
@@ -18,7 +18,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	class WC_City_Select {
 
 		// plugin version
-		const VERSION = '1.0';
+		const VERSION = '1.0.1';
 
 		private $plugin_path;
 		private $plugin_url;
