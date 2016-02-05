@@ -1,8 +1,80 @@
 jQuery( function($) {
 
   // wc_city_select_params is required to continue, ensure the object exists
-  if ( typeof wc_city_select_params === 'undefined' ) {
+  // wc_country_select_params is used for select2 texts. This one is added by WC
+  if ( typeof wc_country_select_params === 'undefined' || typeof wc_city_select_params === 'undefined' ) {
     return false;
+  }
+
+  function getEnhancedSelectFormatString() {
+    var formatString = {
+      formatMatches: function( matches ) {
+        if ( 1 === matches ) {
+          return wc_country_select_params.i18n_matches_1;
+        }
+
+        return wc_country_select_params.i18n_matches_n.replace( '%qty%', matches );
+      },
+      formatNoMatches: function() {
+        return wc_country_select_params.i18n_no_matches;
+      },
+      formatAjaxError: function() {
+        return wc_country_select_params.i18n_ajax_error;
+      },
+      formatInputTooShort: function( input, min ) {
+        var number = min - input.length;
+
+        if ( 1 === number ) {
+          return wc_country_select_params.i18n_input_too_short_1;
+        }
+
+        return wc_country_select_params.i18n_input_too_short_n.replace( '%qty%', number );
+      },
+      formatInputTooLong: function( input, max ) {
+        var number = input.length - max;
+
+        if ( 1 === number ) {
+          return wc_country_select_params.i18n_input_too_long_1;
+        }
+
+        return wc_country_select_params.i18n_input_too_long_n.replace( '%qty%', number );
+      },
+      formatSelectionTooBig: function( limit ) {
+        if ( 1 === limit ) {
+          return wc_country_select_params.i18n_selection_too_long_1;
+        }
+
+        return wc_country_select_params.i18n_selection_too_long_n.replace( '%qty%', limit );
+      },
+      formatLoadMore: function() {
+        return wc_country_select_params.i18n_load_more;
+      },
+      formatSearching: function() {
+        return wc_country_select_params.i18n_searching;
+      }
+    };
+
+    return formatString;
+  }
+
+  // Select2 Enhancement if it exists
+  if ( $().select2 ) {
+    var wc_city_select_select2 = function() {
+      $( 'select.city_select:visible' ).each( function() {
+        var select2_args = $.extend({
+          placeholderOption: 'first',
+          width: '100%'
+        }, getEnhancedSelectFormatString() );
+
+        $( this ).select2( select2_args );
+      });
+    };
+
+    wc_city_select_select2();
+
+    $( document.body ).bind( 'state_changed', function() {
+      wc_city_select_select2();
+    });
   }
 
   /* City select boxes */
@@ -16,6 +88,8 @@ jQuery( function($) {
 
     if ( $statebox.is('input') ) {
       cityToInput( $citybox );
+
+      $( document.body ).trigger( 'state_changed', [country, state, $container ] );
     }
   });
 
@@ -25,7 +99,6 @@ jQuery( function($) {
 
     var country = $container.find( '#billing_country, #shipping_country, #calc_shipping_country' ).val();
     var state = $( this ).val();
-    console.log(state);
     var $citybox = $container.find( '#billing_city, #shipping_city, #calc_shipping_city' );
 
     if ( cities[ country ] ) {
@@ -42,6 +115,7 @@ jQuery( function($) {
       cityToInput( $citybox );
     }
 
+    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
   });
 
   function cityToInput( $citybox ) {
@@ -49,11 +123,13 @@ jQuery( function($) {
     var input_id = $citybox.attr( 'id' );
     var placeholder = $citybox.attr( 'placeholder' );
 
+    $citybox.parent().find( '.select2-container' ).remove();
+
     $citybox.replaceWith( '<input type="text" class="input-text" name="' + input_name + '" id="' + input_id + '" placeholder="' + placeholder + '" />' );
   }
 
   function disableCity( $citybox ) {
-    $citybox.val( '' );
+    $citybox.val( '' ).change();
     $citybox.prop( 'disabled', true );
   }
 
@@ -84,6 +160,8 @@ jQuery( function($) {
 
     if ( $('option[value="'+value+'"]', $citybox).length ) {
       $citybox.val( value ).change();
+    } else {
+      $citybox.val( '' ).change();
     }
   }
 
