@@ -99,7 +99,10 @@ jQuery( function($) {
     var $citybox = $container.find( '#billing_city, #shipping_city, #calc_shipping_city' );
 
     if ( cities[ country ] ) {
-      if ( state ) {
+      /* if the country has no states */
+      if( cities[country] instanceof Array) {
+        cityToSelect( $citybox, cities[ country ] );
+      } else if ( state ) {
         if ( cities[ country ][ state ] ) {
           cityToSelect( $citybox, cities[ country ][ state ] );
         } else {
