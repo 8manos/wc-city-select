@@ -82,23 +82,20 @@ jQuery( function($) {
   var cities = $.parseJSON( cities_json );
 
   $( 'body' ).on( 'country_to_state_changed', function(e, country, $container) {
-
     var $statebox = $container.find( '#billing_state, #shipping_state, #calc_shipping_state' );
-    var $citybox = $container.find( '#billing_city, #shipping_city, #calc_shipping_city' );
-
-    if ( $statebox.is('input') ) {
-      cityToInput( $citybox );
-
-      $( document.body ).trigger( 'state_changed', [country, state, $container ] );
-    }
+    var state = $statebox.val();
+    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
   });
 
   $( 'body' ).on( 'change', 'select.state_select, #calc_shipping_state', function() {
-
     var $container = $( this ).closest( 'div' );
-
     var country = $container.find( '#billing_country, #shipping_country, #calc_shipping_country' ).val();
     var state = $( this ).val();
+
+    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
+  });
+
+  $( 'body' ).on( 'state_changed', function(e, country, state, $container) {
     var $citybox = $container.find( '#billing_city, #shipping_city, #calc_shipping_city' );
 
     if ( cities[ country ] ) {
@@ -114,11 +111,21 @@ jQuery( function($) {
     } else {
       cityToInput( $citybox );
     }
-
-    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
   });
 
+  /* Ajax replaces .cart_totals (child of .cart-collaterals) on shipping calculator */
+  if ( $( '.cart-collaterals' ).length && $( '#calc_shipping_state' ).length ) {
+    var calc_observer = new MutationObserver( function() {
+      $( '#calc_shipping_state' ).change();
+    });
+    calc_observer.observe( document.querySelector( '.cart-collaterals' ), { childList: true });
+  }
+
   function cityToInput( $citybox ) {
+    if ( $citybox.is('input') ) {
+      return;
+    }
+
     var input_name = $citybox.attr( 'name' );
     var input_id = $citybox.attr( 'id' );
     var placeholder = $citybox.attr( 'placeholder' );
@@ -164,6 +171,4 @@ jQuery( function($) {
       $citybox.val( '' ).change();
     }
   }
-
-  $( '#calc_shipping_state' ).change();
 });
