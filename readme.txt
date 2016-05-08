@@ -3,10 +3,10 @@ Contributors: mantish
 Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 1.0.1
+Tested up to: 4.5.2
+Stable tag: 1.0.2
 WC requires at least: 2.2
-WC tested up to: 2.5.2
+WC tested up to: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,9 @@ Contribute at https://github.com/8manos/wc-city-select
 1. Upload to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Use `wc_city_select_cities` filter to load your cities. This is done similarly to [adding states/provinces](https://docs.woothemes.com/document/addmodify-states/). It should be added on your functions.php or a custom plugin.
-```add_filter( 'wc_city_select_cities', 'my_cities' );
+
+`
+add_filter( 'wc_city_select_cities', 'my_cities' );
 /**
  * Replace XX with the country code. Instead of YYY, ZZZ use actual  state codes.
  */
@@ -46,9 +48,16 @@ function my_cities( $cities ) {
 	);
 	return $cities;
 }
-```
+`
 
 == Changelog ==
+
+= 1.0.2 =
+* fix some issues with shipping calculator and other edge cases.
+* Now works with countries that have no states, only cities.
+
+= 1.0.1 =
+* select2 enhancement when available. Adds a JS version of the select dropdown.
 
 = 1.0 =
 * First release.
