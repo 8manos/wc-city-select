@@ -72,7 +72,7 @@ jQuery( function($) {
 
     wc_city_select_select2();
 
-    $( document.body ).bind( 'state_changed', function() {
+    $( document.body ).bind( 'city_to_select', function() {
       wc_city_select_select2();
     });
   }
@@ -81,10 +81,10 @@ jQuery( function($) {
   var cities_json = wc_city_select_params.cities.replace( /&quot;/g, '"' );
   var cities = $.parseJSON( cities_json );
 
-  $( 'body' ).on( 'country_to_state_changed', function(e, country, $container) {
+  $( 'body' ).on( 'country_to_state_changing', function(e, country, $container) {
     var $statebox = $container.find( '#billing_state, #shipping_state, #calc_shipping_state' );
     var state = $statebox.val();
-    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
+    $( document.body ).trigger( 'state_changing', [country, state, $container ] );
   });
 
   $( 'body' ).on( 'change', 'select.state_select, #calc_shipping_state', function() {
@@ -92,10 +92,10 @@ jQuery( function($) {
     var country = $container.find( '#billing_country, #shipping_country, #calc_shipping_country' ).val();
     var state = $( this ).val();
 
-    $( document.body ).trigger( 'state_changed', [country, state, $container ] );
+    $( document.body ).trigger( 'state_changing', [country, state, $container ] );
   });
 
-  $( 'body' ).on( 'state_changed', function(e, country, state, $container) {
+  $( 'body' ).on( 'state_changing', function(e, country, state, $container) {
     var $citybox = $container.find( '#billing_city, #shipping_city, #calc_shipping_city' );
 
     if ( cities[ country ] ) {
@@ -123,6 +123,7 @@ jQuery( function($) {
 
   function cityToInput( $citybox ) {
     if ( $citybox.is('input') ) {
+      $citybox.prop( 'disabled', false );
       return;
     }
 
@@ -170,5 +171,7 @@ jQuery( function($) {
     } else {
       $citybox.val( '' ).change();
     }
+
+    $( document.body ).trigger( 'city_to_select' );
   }
 });
