@@ -18,7 +18,7 @@ WooCommerce uses a text input for the customers to enter the city or town. With 
 
 This will be shown in checkout pages, edit addresses pages and shipping calculator if it's configured that way.
 
-The plugin includes Colombian cities in a file (you'd need to add Colombian states manually to make them work). Please check this file to see the format used for adding cities to any country.
+A list of cities has to be loaded in the functions.php file (the plugin already includes cities from Colombia and Iran). Please check the Installation section for more info.
 
 ### Github
 
@@ -45,6 +45,19 @@ function my_cities( $cities ) {
 			'City 3',
 			'City 4'
 		)
+	);
+	return $cities;
+}
+`
+
+It's also possible to use a list of cities without grouping them by state:
+
+`
+add_filter( 'wc_city_select_cities', 'my_cities' );
+function my_cities( $cities ) {
+	$cities['XX'] = array(
+		'City ',
+		'Another City'
 	);
 	return $cities;
 }

@@ -131,12 +131,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 				if ( $current_sc ) {
 					$dropdown_cities = $cities[ $current_sc ];
-				} else {
+				} else if ( is_array( $cities[0] ) ) {
 					$dropdown_cities = array_reduce( $cities, 'array_merge', array() );
-					sort( $dropdown_cities ) ;
+					sort( $dropdown_cities );
+				} else {
+					$dropdown_cities = $cities;
 				}
 
-				foreach ( $dropdown_cities as $city_name ) {
+        foreach ( $dropdown_cities as $city_name ) {
 					$field .= '<option value="' . esc_attr( $city_name ) . '" '.selected( $value, $city_name, false ) . '>' . $city_name .'</option>';
 				}
 
