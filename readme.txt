@@ -65,6 +65,9 @@ function my_cities( $cities ) {
 
 == Changelog ==
 
+= 1.0.3 =
+* fix some issues when loading cities initially, that were causing warnings.
+
 = 1.0.2 =
 * fix some issues with shipping calculator and other edge cases.
 * Now works with countries that have no states, only cities.
