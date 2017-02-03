@@ -129,16 +129,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="city_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) .'" ' . implode( ' ', $custom_attributes ) . ' placeholder="' . esc_attr( $args['placeholder'] ) . '">
 					<option value="">'. __( 'Select an option&hellip;', 'woocommerce' ) .'</option>';
 
-				if ( $current_sc ) {
+				if ( $current_sc && $cities[ $current_sc ] ) {
 					$dropdown_cities = $cities[ $current_sc ];
-				} else if ( is_array( $cities[0] ) ) {
+				} else if ( is_array( reset($cities) ) ) {
 					$dropdown_cities = array_reduce( $cities, 'array_merge', array() );
 					sort( $dropdown_cities );
 				} else {
 					$dropdown_cities = $cities;
 				}
 
-        foreach ( $dropdown_cities as $city_name ) {
+				foreach ( $dropdown_cities as $city_name ) {
 					$field .= '<option value="' . esc_attr( $city_name ) . '" '.selected( $value, $city_name, false ) . '>' . $city_name .'</option>';
 				}
 
