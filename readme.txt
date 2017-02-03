@@ -3,10 +3,10 @@ Contributors: mantish
 Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
-Tested up to: 4.5.2
-Stable tag: 1.0.2
+Tested up to: 4.7.3
+Stable tag: 1.0.3
 WC requires at least: 2.2
-WC tested up to: 2.6.0
+WC tested up to: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
