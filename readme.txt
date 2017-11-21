@@ -3,10 +3,10 @@ Contributors: mantish
 Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
-Tested up to: 4.7.3
+Tested up to: 4.9.1
 Stable tag: 1.0.3
 WC requires at least: 2.2
-WC tested up to: 2.7.0
+WC tested up to: 3.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,17 +18,12 @@ WooCommerce uses a text input for the customers to enter the city or town. With 
 
 This will be shown in checkout pages, edit addresses pages and shipping calculator if it's configured that way.
 
-A list of cities has to be loaded in the functions.php file (the plugin already includes cities from Colombia and Iran). Please check the Installation section for more info.
+### How to add cities
 
-### Github
+A list of cities has to be loaded in the functions.php file (the plugin already includes cities from some countries).
 
-Contribute at https://github.com/8manos/wc-city-select
-
-== Installation ==
-
-1. Upload to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Use `wc_city_select_cities` filter to load your cities. This is done similarly to [adding states/provinces](https://docs.woothemes.com/document/addmodify-states/). It should be added on your functions.php or a custom plugin.
+Use `wc_city_select_cities` filter to load your cities. This is done similarly to [adding states/provinces](https://docs.woothemes.com/document/addmodify-states/).
+It should be added on your functions.php or a custom plugin.
 
 `
 add_filter( 'wc_city_select_cities', 'my_cities' );
@@ -62,6 +57,10 @@ function my_cities( $cities ) {
 	return $cities;
 }
 `
+
+### Github
+
+Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
 
