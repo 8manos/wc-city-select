@@ -1,3 +1,12 @@
+<?php
+
+/**
+ * Danish cities
+ * List generated from https://www.postnord.dk/kundeservice/postnummerkort/print-postnumre
+ */
+
+global $cities;
+
 $cities['DK'] = array(
 	'Aabenraa',
 	'Aabybro',
