@@ -24,6 +24,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		private $plugin_url;
 
 		private $cities;
+		private $dropdown_cities;
 
 		public function __construct() {
 			add_filter( 'woocommerce_billing_fields', array( $this, 'billing_fields' ), 10, 2 );
@@ -73,6 +74,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 
 			$this->cities = apply_filters( 'wc_city_select_cities', $cities );
+		}
+
+		private function add_to_dropdown($item) {
+			$this->dropdown_cities[] = $item;
 		}
 
 		public function form_field_city( $field, $key, $args, $value ) {
@@ -130,15 +135,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					<option value="">'. __( 'Select an option&hellip;', 'woocommerce' ) .'</option>';
 
 				if ( $current_sc && $cities[ $current_sc ] ) {
-					$dropdown_cities = $cities[ $current_sc ];
-				} else if ( is_array( reset($cities) ) ) {
-					$dropdown_cities = array_reduce( $cities, 'array_merge', array() );
-					sort( $dropdown_cities );
+					$this->dropdown_cities = $cities[ $current_sc ];
 				} else {
-					$dropdown_cities = $cities;
+					$this->dropdown_cities = [];
+					array_walk_recursive( $cities, array( $this, 'add_to_dropdown' ) );
+					sort( $this->dropdown_cities );
 				}
 
-				foreach ( $dropdown_cities as $city_name ) {
+				foreach ( $this->dropdown_cities as $city_name ) {
 					$field .= '<option value="' . esc_attr( $city_name ) . '" '.selected( $value, $city_name, false ) . '>' . $city_name .'</option>';
 				}
 
