@@ -3,7 +3,7 @@
  * Italian cities
  * 
  * Data from: https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv
- * Version: 2023-02-13 
+ * Version: 2023-01-17 
  * 
  * Info: https://www.istat.it/it/archivio/6789
  */
