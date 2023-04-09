@@ -4,7 +4,7 @@ Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
 Tested up to: 6.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,10 @@ function my_cities( $cities ) {
 Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
+
+= 1.0.7 =
+* Add city files for Egypt
+* Update Italian cities
 
 = 1.0.6 =
 * Add support to WordPress multisite.
