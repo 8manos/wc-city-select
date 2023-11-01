@@ -37,6 +37,9 @@ if ( ( is_multisite() && array_key_exists( 'woocommerce/woocommerce.php', get_si
 
 			//js scripts
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+
+			// Add HPOS compatibility
+			add_action('before_woocommerce_init', array($this, 'hposCompatibility'));
 		}
 
 		public function billing_fields( $fields, $country ) {
@@ -197,6 +200,12 @@ if ( ( is_multisite() && array_key_exists( 'woocommerce/woocommerce.php', get_si
 			}
 
 			return $this->plugin_url = plugin_dir_url( __FILE__ );
+		}
+
+		public function hposCompatibility() {
+			if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+			}
 		}
 	}
 
