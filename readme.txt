@@ -3,8 +3,8 @@ Contributors: mantish, rwky, jonaskirch
 Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
 Requires at least: 4.0
-Tested up to: 6.2
-Stable tag: 1.0.7
+Tested up to: 6.4
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,10 @@ function my_cities( $cities ) {
 Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
+
+= 1.0.8 =
+* Fix issue in Egypt cities file (EGDK missing)
+* Declare WooCommerce HPOS compatibility
 
 = 1.0.7 =
 * Add city files for Egypt
