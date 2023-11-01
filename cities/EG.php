@@ -237,7 +237,7 @@ $cities['EG'] = array(
             'Shoubra Alkhema',
             'Tookh'
         ),
-        'EGKB' => array(
+        'EGDK' => array(
             'Aga',
             'Al Daqahliya',
             'Al Mansoura',
