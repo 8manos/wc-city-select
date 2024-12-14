@@ -10,7 +10,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *
  * WC requires at least: 2.2
- * WC tested up to:      8.8
+ * WC tested up to:      9.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -121,7 +121,7 @@ if ( ( is_multisite() && array_key_exists( 'woocommerce/woocommerce.php', get_si
 			}
 
 			// field p and label
-			$field  = '<p class="form-row ' . esc_attr( implode( ' ', $args['class'] ) ) .'" id="' . esc_attr( $args['id'] ) . '_field">';
+			$field = '<p class="form-row ' . esc_attr( implode( ' ', $args['class'] ) ) .'" id="' . esc_attr( $args['id'] ) . '_field">';
 			if ( $args['label'] ) {
 				$field .= '<label for="' . esc_attr( $args['id'] ) . '" class="' . esc_attr( implode( ' ', $args['label_class'] ) ) .'">' . $args['label']. $required . '</label>';
 			}
@@ -130,24 +130,27 @@ if ( ( is_multisite() && array_key_exists( 'woocommerce/woocommerce.php', get_si
 			$country_key = $key == 'billing_city' ? 'billing_country' : 'shipping_country';
 			$current_cc  = WC()->checkout->get_value( $country_key );
 
-			$state_key = $key == 'billing_city' ? 'billing_state' : 'shipping_state';
-			$current_sc  = WC()->checkout->get_value( $state_key );
+			$state_key   = $key == 'billing_city' ? 'billing_state' : 'shipping_state';
+			$current_sc  = WC()->checkout->get_value($state_key);
 
-			// Get country cities
-			$cities = $this->get_cities( $current_cc );
+			if ($current_cc) {
+				// Get cities for selected country
+				$countryCities = $this->get_cities($current_cc);
 
-			if ( is_array( $cities ) ) {
-
-				$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="city_select ' . esc_attr( implode( ' ', $args['input_class'] ) ) .'" ' . implode( ' ', $custom_attributes ) . ' placeholder="' . esc_attr( $args['placeholder'] ) . '">
-					<option value="">'. __( 'Select an option&hellip;', 'woocommerce' ) .'</option>';
-
-				if ( $current_sc && $cities[ $current_sc ] ) {
-					$this->dropdown_cities = $cities[ $current_sc ];
-				} else {
-					$this->dropdown_cities = [];
-					array_walk_recursive( $cities, array( $this, 'add_to_dropdown' ) );
-					sort( $this->dropdown_cities );
+				if (is_array($countryCities)) {
+					if (isset($countryCities[0])) {
+						// Populate country cities if it has no states (array is sequencial)
+						$this->dropdown_cities = $countryCities;
+					} elseif ($current_sc && $countryCities[$current_sc]) {
+						// Populate selected state cities
+						$this->dropdown_cities = $countryCities[$current_sc];
+					}
 				}
+			}
+
+			if (is_array($this->dropdown_cities)) {
+				$field .= '<select name="' . esc_attr($key) . '" id="' . esc_attr($args['id']) . '" class="city_select ' . esc_attr(implode(' ', $args['input_class'])) . '" ' . implode(' ', $custom_attributes) . ' placeholder="' . esc_attr($args['placeholder']) . '">
+					<option value="">' . __('Select an option&hellip;', 'woocommerce') . '</option>';
 
 				foreach ( $this->dropdown_cities as $city_name ) {
 					$field .= '<option value="' . esc_attr( $city_name ) . '" '.selected( $value, $city_name, false ) . '>' . $city_name .'</option>';
