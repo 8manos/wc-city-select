@@ -16,6 +16,13 @@ WooCommerce uses a text input for the customers to enter the city or town. With 
 
 This will be shown in checkout pages, edit addresses pages and shipping calculator if it's configured that way.
 
+### WooCommerce Cart and Checkout Blocks
+
+This plugin is not yet compatible with Blocks.
+It works using the legacy shortcodes: `[woocommerce_cart]` and `[woocommerce_checkout]`.
+
+To make this plugin work, you can use these shortcodes instead of the blocks for your Cart and Checkout pages.
+
 ### How to add cities
 
 A list of cities has to be loaded in the functions.php file (the plugin already includes cities from some countries).
