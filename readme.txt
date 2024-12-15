@@ -4,7 +4,7 @@ Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, city select, cities select, city dropdown, cities dropdown
 Requires at least: 4.0
 Tested up to: 6.7
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,10 @@ function my_cities( $cities ) {
 Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
+
+= 1.0.9 =
+* Load select with only the correct cities for the Country / State
+* Declare Blocks (in)compatibility
 
 = 1.0.8 =
 * Fix issue in Egypt cities file (EGDK missing)
