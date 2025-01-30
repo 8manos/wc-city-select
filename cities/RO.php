@@ -1574,7 +1574,12 @@ $cities['RO'] = array(
 
     ) ,
     'B' => array(
-        'Bucuresti',
+        'Sector 1',
+    	'Sector 2',
+	'Sector 3',
+	'Sector 4',
+	'Sector 5',
+	'Sector 6'
 
     ) ,
     'BC' => array(
