@@ -3,8 +3,8 @@ Contributors: mantish, rwky
 Donate link: mailto:paypal@8manos.com
 Tags: woocommerce, city select, cities select, city dropdown, cities dropdown
 Requires at least: 4.0
-Tested up to: 6.7
-Stable tag: 1.0.9
+Tested up to: 6.8
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,9 @@ function my_cities( $cities ) {
 Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
+
+= 1.0.10 =
+* Update Romanian cities
 
 = 1.0.9 =
 * Load select with only the correct cities for the Country / State
